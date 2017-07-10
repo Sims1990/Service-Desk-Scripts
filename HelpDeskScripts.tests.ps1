@@ -290,7 +290,7 @@ Describe "Resource Mailbox Functions" -Tags ExchangeMailbox {
     AfterEach {
         Get-Module Exchange2 | Remove-Module
     }
-    Context "Creating Resource Mailbox Exchange Side" -Tag CreateResourceMailbox {
+    Context "Creating Resource Mailbox Exchange Side" {
         It "Creation of Group Mailbox One Owner" {
             New-ResourceMailbox -DisplayName 'Test Bx' -LogonName 'testbx' -NewPassword 'Mt1231231' -Owner 'msims'
         }#it
@@ -308,7 +308,7 @@ Describe "Resource Mailbox Functions" -Tags ExchangeMailbox {
             Assert-MockCalled Set-Mailbox -Times 1 -Scope It -Exactly 
         }#it
     }#Context
-    Context "Setting of Resource Mailbox Active Directory" -Tag SetResourceMailbox {
+    Context "Setting of Resource Mailbox Active Directory" {
         It "Does not write to console" {
             Set-ResourceMailbox -LogonName 'test23' -CaseID '1231231' -Owner 'msims' -Purpose 'Testing'
             Assert-MockCalled Write-Host -Times 0 -Scope Context -Exactly
@@ -449,7 +449,7 @@ Describe "New User Creation" -Tags NewUserCreate {
         Get-Module ActiveDirectory | Remove-Module
         Get-Module Exchange2 | Remove-Module
     }#AfterEach
-    Context "Create New User" -Tag CreateUser {
+    Context "Create New User" {
         It "New User is Created" {
             New-CompanyUser -Username 'test1' -FirstName 'test' -LastName '1' -NewPassword 'P@ssw0rd' -Location 'US'
             Assert-MockCalled New-Mailbox -Times 1 -Scope It -Exactly
@@ -464,7 +464,7 @@ Describe "New User Creation" -Tags NewUserCreate {
             Assert-MockCalled Set-Mailbox -ParameterFilter {@{ResetPasswordONNextLogon="$false"}}
         }#it
     }#Context
-    Context "Setting of Attributes" -Tag SetUser {
+    Context "Setting of Attributes" {
         It "CaseID only accepts Integers" {
             {Set-CompanyUser -Username 'test1' -CaseID 'tererr' -StartDate '03/03/2018' -FirstName 'test' -LastName '1' -Location 'US'} | Should throw
         }#it
@@ -486,7 +486,7 @@ Describe "New User Creation" -Tags NewUserCreate {
         It "Confrimation Email Sent" {
             $SUser
             Assert-MockCalled Send-ConfirmationEmail -ParameterFilter {@{NewUser='yes'}}
-            Assert-MockCalled Send-ConfirmationEmail -Scope it -Exactly
+            Assert-MockCalled Send-ConfirmationEmail -Scope it
         }#it
     }#Context
 }#Describe
