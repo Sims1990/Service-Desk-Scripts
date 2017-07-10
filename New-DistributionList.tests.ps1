@@ -13,7 +13,7 @@ Describe "Distribution List Functions" {
      }#BeforeEach
      It "Should Call New-DistributionGroup" {
          New-DistributionList -DisplayName 'test 1' -Alias 'test1' -CaseID '1231231' -Owner 'bbuilder' -Purpose 'mocktest'  
-         Assert-MockCalled -CommandName New-DistributionGroup -Times 1 -Scope it
+         Assert-MockCalled -CommandName New-DistributionList -Times 1 -Scope it
      }#it
     }#Context 
 }#Describe -Distribution List Functions
