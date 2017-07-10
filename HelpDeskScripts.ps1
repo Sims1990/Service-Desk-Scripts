@@ -481,10 +481,10 @@ Describing Integration Tests
 .NOTES
    1st part of the Service Desk termination policy.
 .FUNCTIONALITY
-   1st part of the BCD termination procedure. 2nd part is found in the Remove-BCDUserMailbox cmdlet.
+   1st part of the Company termination procedure. 2nd part is found in the Remove-CompanyUserMailbox cmdlet.
 #>
 	
-	function Remove-BCDUser
+	function Remove-CompanyUser
 	{
 		[CmdletBinding()]
 		param (
@@ -920,7 +920,7 @@ Return from LOA $Date Case# $CaseID - $Tech
 			$UsedPassword = ConvertTo-SecureString -AsPlainText $NewPassword -Force
 			
 			#OU that the user will be added to
-			$OUnit = 'Company.bcdtravel.local/IT/Shared/Mailboxes'
+			$OUnit = 'Company.Companytravel.local/IT/Shared/Mailboxes'
 			
 			#Hash Table for the Resource Mailbox
 			$UProp = @{
@@ -1262,7 +1262,7 @@ Purpose: $Purpose"
 	}
 
 	#================================================================================================================================
-	#==============================================BCD New User Functions===========================================================================
+	#==============================================Company New User Functions===========================================================================
 	#================================================================================================================================
 
 <#
@@ -1346,7 +1346,7 @@ function New-CompanyUser
 			New-Mailbox @UProp
 			Write-Verbose 'Mailbox and user created in EAC'
 			
-			#Command to add the alias email addresses for Lync and the normal bcdtravel.com email address
+			#Command to add the alias email addresses for Lync and the normal Companytravel.com email address
 			Set-Mailbox @UMailboxProperties
 			Write-Verbose 'Email Addresses Set'
 
@@ -1427,7 +1427,7 @@ function New-CompanyUser
 			#Original Email Address Variable 
 			$OriginalUserEmail = ((Get-Mailbox $Username).EmailAddresses)
 			
-			#Command to add the alias email addresses for Lync and the normal bcdtravel.com email address
+			#Command to add the alias email addresses for Lync and the normal Companytravel.com email address
 			Set-Mailbox $Username -EmailAddresses ($OriginalUserEmail += "smtp:$FirstName.$LastName@lync.Company.com", "sip:$FirstName.$LastName@lync.Copmany.com")
 			Write-Verbose 'Email Addresses Set'
 		} #else
