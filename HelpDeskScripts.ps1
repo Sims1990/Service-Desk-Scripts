@@ -443,7 +443,7 @@ Hello customername, a  network account has been created for $Name.  The Network 
 		}
 		END
 		{
-			Send-ConfirmationEmail -DistributionEmail
+			Send-ConfirmationEmail -DistributionList
 		}#end
 	}
 	
@@ -643,7 +643,7 @@ Disabled $TermDate Case# $CaseID - $env:username
 			#Adds Username to text list for the automated Termination 
 			(Get-Mailbox $Username).alias | Out-File '\\SourceServer\C$\Console\Production\Text Lists\MailboxesToRemove.txt' -Append
 		
-			Send-ConfirmationEmail -TerminationEmail
+			Send-ConfirmationEmail -UserTermination
 		
 		if ($Test)
 		{
@@ -773,7 +773,7 @@ LOA $Date Case# $CaseID - $Tech
 		}
 		END
 		{
-			Send-ConfirmationEmail -LOAEmail
+			Send-ConfirmationEmail -LeaveofAbsence
 		}
 	} #function
 	
@@ -862,7 +862,7 @@ Return from LOA $Date Case# $CaseID - $Tech
 		
 		END
 		{
-			Send-ConfirmationEmail -ReturnFromLOAEmail
+			Send-ConfirmationEmail -ReturnFromLeaveofAbsence
 		}
 	}
 
@@ -950,7 +950,7 @@ Return from LOA $Date Case# $CaseID - $Tech
 			$GrpName = (Get-Mailbox $LogonName).Name
 				
 				#creates array to fo owners to be added
-				$collection = "$Owner", "$Owner2", "$Owner3"
+				$collection = "$Owner"
 				
 				foreach ($GrpUser in $collection)
 				{
@@ -1096,7 +1096,7 @@ Purpose: $Purpose"
         }
 		END
 		{
-			Send-ConfirmationEmail -ResourceMailboxEmail
+			Send-ConfirmationEmail -ResourceMailbox
 		}
 	}
 	#================================================================================================================================
@@ -1219,7 +1219,7 @@ Purpose: $Purpose"
 				}#Describe
 			}#if
 
-			Send-ConfirmationEmail -MailContactEmail
+			Send-ConfirmationEmail -MailContact
 		}
 		END
 		{}	
