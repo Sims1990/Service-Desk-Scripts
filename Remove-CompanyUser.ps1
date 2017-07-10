@@ -188,9 +188,7 @@ Disabled $TermDate Case# $CaseID - $env:username
 
 			#Adds Username to text list for the automated Termination 
 			(Get-Mailbox $Username).alias | Out-File '\\SourceServer\C$\Console\Production\Text Lists\MailboxesToRemove.txt' -Append
-		
-			Send-ConfirmationEmail -TerminationEmail
-		
+				
 		if ($Test)
 		{
 			Describe "Integration Tests" {

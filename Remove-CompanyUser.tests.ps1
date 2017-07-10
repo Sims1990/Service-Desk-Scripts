@@ -25,7 +25,7 @@ Describe "Termination Functions" -Tag TerminationFunctions {
             }#mock
             mock -CommandName Set-Aduser -MockWith {@{Username='test1'}
             }#mock
-            Mock -CommandName Set-ADAccountPassword #-MockWith {@{identity='test1'}
+            Mock -CommandName Set-ADAccountPassword 
        # }#mock
             mock -CommandName Remove-ADGroupMember -MockWith {@{Members='test1'}
 
@@ -33,7 +33,7 @@ Describe "Termination Functions" -Tag TerminationFunctions {
          
     }#BeforeEach
     It "Remove-User CMD called" {
-        Remove-User -Username test1 -CaseID 1231231 -TermPassword 'P@ssw0rd'
+        Remove-CompanyUser -Username test1 -CaseID 1231231 -TermPassword 'P@ssw0rd'
     }#it
     It "Get-ADUser Called" {
         Assert-MockCalled -CommandName Get-AdUser -Times 3 -Scope Context
@@ -65,10 +65,9 @@ Describe "Termination Functions" -Tag TerminationFunctions {
             mock -CommandName Out-File -MockWith{@{FilePath='\\FilerServer\c$'}}
             mock -CommandName New-MailboxExportRequest 
             mock -CommandName Get-Mailbox
-            mock -CommandName Send-ConfirmationEmail -MockWith{@{TerminationEmail='yes'}}
         }
     It "Mailbox Removal Ran" {
-        Remove-UserMailbox -Username 'test1'
+        Remove-CompanyUserMailbox -Username 'test1'
     }#it
     It "Forwarding address removed and hidden from GAL" {
         Assert-MockCalled -CommandName Set-Mailbox -Times 1 -Scope Context
@@ -82,8 +81,5 @@ Describe "Termination Functions" -Tag TerminationFunctions {
     It "Write to Text List for removal" {
         Assert-MockCalled -CommandName Out-File -Times 1 -Scope Context -ExclusiveFilter {$Append}
     }#it
-    It "Confirmation Email Sent" {
-        Assert-MockCalled -CommandName Send-ConfirmationEmail -ExclusiveFilter {$TerminationEmail -eq 'yes'}
-    }
     }#Context - Removal of mailbox
 }#Describe -Termination Functions
