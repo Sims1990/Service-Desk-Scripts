@@ -1,4 +1,8 @@
 # Service-Desk-Scripts
-Collection of PowerShell Scripts currectly used by our Service Desk. Included with these scripts are Pester unit tests and Pester integration tests. Some are still a work in progress so please check code before using in your environment.
 
-#Pester Tests are compatible with Open Source PowerShell using the psl-pester module
+Collection of PowerShell scripts that I created at my current job to automate or user provisioning and other tasks. These scripts mirror what we are using in production, but obviously have all the company specific logic removed. This will allow others to modify the scripts for their usage. 
+
+## Dependencies
+
+* Administrative access to Exchange Admin Center PowerShell Cmdlets
+* Execution policy to allow running scripts on the system
